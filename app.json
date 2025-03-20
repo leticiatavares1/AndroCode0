@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Wolf_Studio_Barber",
+    "name": "Wolf Studio Barber",
     "slug": "Wolf_Studio_Barber",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -30,7 +30,7 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#18212A"
         }
       ]
     ],
