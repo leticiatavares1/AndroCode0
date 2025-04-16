@@ -3,6 +3,10 @@ import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import * as SplashScreen from "expo-splash-screen";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../firebase/firebaseConfig";
+
+SplashScreen.preventAutoHideAsync(); // evitar auto-hide antes da inicialização
 
 export default function App() {
   const router = useRouter();
@@ -14,14 +18,19 @@ export default function App() {
   });
 
   useEffect(() => {
-    async function prepare() {
-      await SplashScreen.preventAutoHideAsync();
-      if (fontsLoaded) {
-        await SplashScreen.hideAsync();
-        router.push("/screens/Login/Login"); // Navega assim que a fonte estiver carregada
+    if (!fontsLoaded) return;
+
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      await SplashScreen.hideAsync();
+
+      if (user) {
+        router.replace("/Home");
+      } else {
+        router.replace("/screens/Login");
       }
-    }
-    prepare();
+    });
+
+    return unsubscribe;
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {

@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 32,
       fontFamily: "Poppins_700Bold",
+      color: "black",
     },
     input: {
       height: 40,
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
       alignItems: "center",
     },
     esqueceuSenha: {
-      color:"#818181",
+      color:"#A0A0A0",
       fontFamily: "Poppins_400Regular",
       textAlign: "right",
       marginBottom: 24,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
       textAlign: "center",
     },
     criarContaLink: {
-      color: "#818181",
+      color: "#A0A0A0",
     },
     button: {
       backgroundColor: "#18212A",

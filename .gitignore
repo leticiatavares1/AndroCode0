@@ -32,6 +32,15 @@ yarn-error.*
 # local env files
 .env*.local
 
+# Firebase credentials
+firebase/firebaseConfig.ts
+app/google-services.json
+
+# Ignorar build intermediário
+/android/.gradle/
+/android/app/build/
+/android/build/
+
 # typescript
 *.tsbuildinfo
 

@@ -3,16 +3,38 @@ import { View, Text, TextInput, TouchableOpacity, Alert, TouchableWithoutFeedbac
 import { Feather } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import styles from "./Styles";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebase/firebaseConfig";
+import { useRouter } from "expo-router";
+
 
 export default function Login() {
+
+  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    if (username === "admin" && password === "1234") {
-      Alert.alert("Login bem-sucedido!");
-    } else {
-      Alert.alert("Usuário ou senha incorretos!");
+  const handleLogin = async () => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, username, password);
+      const user = userCredential.user;
+      
+      if (!user.emailVerified) {
+        Alert.alert(
+          "E-mail não verificado",
+          "Por favor, verifique seu e-mail antes de fazer login."
+        );
+        return;
+      }
+
+      router.replace("/Home");
+    } catch (error: any) {
+      let msg = "Erro ao fazer login.";
+      if (error.code === "auth/invalid-email") msg = "E-mail ou senha incorretos.";
+      if (error.code === "auth/user-not-found") msg = "Usuário não encontrado.";
+      if (error.code === "auth/wrong-password") msg = "E-mail ou senha incorretos.";
+      Alert.alert("Erro", msg);
     }
   };
 
@@ -50,14 +72,14 @@ export default function Login() {
             />
           </View>
 
-          <Link href="/screens/EsqueceuSenha/EsqueceuSenha" style={styles.esqueceuSenha}>Esqueceu a senha?</Link>
+          <Link href="/screens/EsqueceuSenha" style={styles.esqueceuSenha}>Esqueceu a senha?</Link>
 
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Acessar</Text>
           </TouchableOpacity>
 
           <Text style={styles.criarConta}>Ainda não possui uma conta? 
-            <Link href="/screens/Cadastro/Cadastro" style={styles.criarContaLink}> Cadastre-se</Link>
+            <Link href="/screens/Cadastro" style={styles.criarContaLink}> Cadastre-se</Link>
           </Text>
 
         </View>
