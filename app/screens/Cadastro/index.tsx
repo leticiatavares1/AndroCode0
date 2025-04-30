@@ -14,6 +14,9 @@ import { useRouter } from "expo-router";
 
 export default function Cadastro() {
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const router = useRouter();
 
   const [nome, setNome] = useState('');
@@ -36,12 +39,12 @@ export default function Cadastro() {
       await sendEmailVerification(user);
       
       await set(ref(database, `usuarios/${user.uid}`), {
-        nome: nome,
-        sobrenome: sobrenome,
-        whatsapp: whatsapp,
-        email: email,
-        tipo: "cliente", // ou "admin" no futuro.
-        dataInsercao: new Date().toISOString()
+        Name: nome,
+        LastName: sobrenome,
+        WhatsApp: whatsapp,
+        Email: email,
+        Type: 1, // ou "admin" no futuro.
+        DateAdd: new Date().toISOString()
       });
 
       Alert.alert(
@@ -124,10 +127,18 @@ export default function Cadastro() {
                 <TextInput 
                   style={styles.input} 
                   placeholder="Digite sua senha" 
-                  secureTextEntry
+                  secureTextEntry={!showPassword}
                   value={password}
                   onChangeText={setPassword} 
                 />
+                <TouchableOpacity 
+                  onPress={() => setShowPassword(!showPassword)}
+                  style={{ position: 'absolute', right: 0, padding: 10 }}
+                >
+                 <Text style={styles.showPasswordStyle}>
+                  {showPassword ? 'Ocultar' : 'Mostrar'}
+                </Text>
+                </TouchableOpacity>
               </View>
 
               <View style={styles.inputContainer}>
@@ -135,10 +146,18 @@ export default function Cadastro() {
                 <TextInput 
                   style={styles.input} 
                   placeholder="Confirme sua senha" 
-                  secureTextEntry
+                  secureTextEntry={!showConfirmPassword}
                   value={confirmPassword}
                   onChangeText={setConfirmPassword} 
                 />
+                <TouchableOpacity 
+                  onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                  style={{ position: 'absolute', right: 0, padding: 10 }}  
+                >
+                <Text style={styles.showPasswordStyle}>
+                  {showConfirmPassword ? 'Ocultar' : 'Mostrar'}
+                </Text>
+                </TouchableOpacity>
               </View>
 
               <TouchableOpacity style={styles.button} onPress={handleSignUp}>

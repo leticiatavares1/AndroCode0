@@ -58,7 +58,12 @@ const styles = StyleSheet.create({
       justifyContent:"center",
       alignItems: "center",
       marginBottom: 80,
-    }
+    },
+    showPasswordStyle: {
+      color: "black",
+      fontSize: 14,
+      fontFamily: "Poppins_400Regular",
+    },
   });
   
 export default styles

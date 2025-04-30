@@ -53,6 +53,11 @@ const styles = StyleSheet.create({
       fazerLoginLink: {
         color: "#818181",
       },
+      showPasswordStyle: {
+        color: "black",
+        fontSize: 14,
+        fontFamily: "Poppins_400Regular",
+      },
   });
 
 export default styles;

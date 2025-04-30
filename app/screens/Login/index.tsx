@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard, StatusBar } from "react-native";
 import { Feather } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import styles from "./Styles";
@@ -11,6 +11,7 @@ import { useRouter } from "expo-router";
 export default function Login() {
 
   const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -43,6 +44,11 @@ export default function Login() {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.containerGeral}>
 
+      <StatusBar
+        backgroundColor="#ffffff"
+        barStyle="dark-content"
+      />
+
         <View style={styles.containerSecundario}>
 
           <View style={styles.logo}>
@@ -66,10 +72,18 @@ export default function Login() {
             <TextInput
               style={styles.input}
               placeholder="Senha"
-              secureTextEntry
+              secureTextEntry={!showPassword}
               value={password}
               onChangeText={setPassword}
             />
+            <TouchableOpacity 
+              onPress={() => setShowPassword(!showPassword)}
+              style={{ position: 'absolute', right: 0, padding: 10 }}
+            >
+              <Text style={styles.showPasswordStyle}>
+                  {showPassword ? 'Ocultar' : 'Mostrar'}
+              </Text>
+            </TouchableOpacity>
           </View>
 
           <Link href="/screens/EsqueceuSenha" style={styles.esqueceuSenha}>Esqueceu a senha?</Link>

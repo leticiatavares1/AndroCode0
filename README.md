@@ -2,7 +2,9 @@
 
 <h3>Comandos para rodar o projeto:</h3>
 
-<p><strong>npm start</strong> ou <strong>npm run android</strong> ou <strong>npx expo start</strong></p>
+<p>Comando para instalar as dependencias do projeto <strong>npm install</strong></p>
+
+<p>Comando para rodar o projeto <strong>npm start</strong> ou <strong>npm run android</strong> ou <strong>npx expo start</strong></p>
 
 <h3>Rode esse comando para gerar um build de desenvolvimento:</h3>
 
@@ -23,3 +25,21 @@
 <h3>Instalando dependencias e outros comandos: </h3>
 
 <p>Para instalar dependências e utilizar outros comandos é necessário utilizar <strong>npx expo "comando"</strong> podendo ser uma instalação ou até mesmo rodar o projeto sem cache utilizando o comando <strong>npx expo start --clear</strong></p>
+
+<h3>Comandos para rodar o projeto limpo</h3>
+<p>Este comando limpa o "cache"
+</br>
+cd android
+</br>
+./gradlew clean
+</br>
+cd ..
+</p>
+<p>O expo prebuild --clean vai recriar toda a pasta android/ (e ios/ se existir), com base no app.json.</p>
+
+<!--
+Banco de dados Type
+1 - Cliente
+2 - Adm
+3 - Barbeiro
+-->
