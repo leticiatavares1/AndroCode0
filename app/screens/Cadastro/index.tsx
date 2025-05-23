@@ -43,7 +43,7 @@ export default function Cadastro() {
         LastName: sobrenome,
         WhatsApp: whatsapp,
         Email: email,
-        Type: 1, // ou "admin" no futuro.
+        UserType: 1, // ou "admin" no futuro.
         DateAdd: new Date().toISOString()
       });
 

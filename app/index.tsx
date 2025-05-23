@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { useRouter } from "expo-router";
 import { useFonts, Poppins_400Regular, Poppins_500Medium, Poppins_700Bold } from "@expo-google-fonts/poppins";
 import * as SplashScreen from "expo-splash-screen";
@@ -34,8 +34,10 @@ export default function App() {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return null;
+    return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Carregando...</Text>
+    </View>
+    );
   }
-
-  return <View />;
 }
