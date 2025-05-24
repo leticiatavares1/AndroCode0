@@ -7,8 +7,8 @@ export default function Agendado() {
     <View>
     
       <StatusBar
-        backgroundColor="#ffffff"
-        barStyle="dark-content"
+        backgroundColor="#18212A"
+        barStyle="light-content"
       />
         
       <Text>Esta é a tela Agendado!</Text>

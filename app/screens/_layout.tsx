@@ -5,8 +5,15 @@ export default function ScreensLayout() {
     <Stack
       screenOptions={{
         headerShown: true,
-        headerTitle: "",
+        headerTitle: '',
         headerShadowVisible: false,
+        contentStyle: {
+          backgroundColor: '#18212A',
+        },
+        headerStyle: {
+          backgroundColor: '#18212A',
+        },
+        headerTintColor: '#C9A64D',
       }}
     />
   );

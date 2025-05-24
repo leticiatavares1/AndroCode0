@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { auth, database } from '../../firebase/firebaseConfig';
 import { ref, onValue } from 'firebase/database';
@@ -23,6 +23,12 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
+
+      <StatusBar
+              backgroundColor="#18212A"
+              barStyle="light-content"
+      />
+
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.greetingContainer}>
           <Text style={styles.greeting}>Olá {userName ? userName : 'Usuário'}</Text>

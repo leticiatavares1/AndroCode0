@@ -10,8 +10,8 @@ export default function Informacoes() {
     >
 
       <StatusBar
-              backgroundColor="#ffffff"
-              barStyle="dark-content"
+              backgroundColor="#18212A"
+              barStyle="light-content"
       />
 
       <View style={styles.containerGeral}>
@@ -22,7 +22,7 @@ export default function Informacoes() {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.containerInfo} onPress={() => Linking.openURL("https://maps.app.goo.gl/b3ZoZUFwzBmU6SQC6")}>
-          <Feather name="map-pin" size={24} color="black" />
+          <Feather name="map-pin" size={24} color="#ffffff" />
           <View style={styles.textWrapper}>
             <Text style={styles.textInfo}>
               R. Ferreira Penteado, 577 - Centro, Campinas - SP, 13010-040
@@ -33,7 +33,7 @@ export default function Informacoes() {
         <Text style={styles.title}>Horário de atendimento</Text>
 
         <View style={styles.containerInfo}>
-          <Feather name="clock" size={24} color="black" />
+          <Feather name="clock" size={24} color="#ffffff" />
           <View style={styles.textWrapper}>
             <Text style={styles.textInfo}>
               <Text style={styles.textInfoBold}>Segunda-Feira a Sexta-Feira: </Text>
@@ -53,7 +53,7 @@ export default function Informacoes() {
         <Text style={styles.title}>Contato</Text>
 
         <TouchableOpacity style={styles.containerMaisInfo} onPress={() => Linking.openURL("tel:+5519989434467")}>
-          <Feather name="phone" size={24} color="black" />
+          <Feather name="phone" size={24} color="#ffffff" />
           <View style={styles.textWrapper}>
             <Text style={styles.textInfo}>(19) 98943-4467</Text>
           </View>
@@ -76,7 +76,7 @@ export default function Informacoes() {
         <Text style={styles.title}>Mais Informações</Text>
 
         <View style={styles.containerMaisInfo}>
-          <Feather name="dollar-sign" size={24} color="black" />
+          <Feather name="dollar-sign" size={24} color="#ffffff" />
           <View style={styles.textWrapper}>
             <Text style={styles.textInfo}>
               <Text style={styles.textInfoBold}>Formas de pagamento: </Text>
@@ -86,7 +86,7 @@ export default function Informacoes() {
         </View>
 
         <View style={styles.containerMaisInfo}>
-          <Feather name="users" size={24} color="black" />
+          <Feather name="users" size={24} color="#ffffff" />
           <View style={styles.textWrapper}>
             <Text style={styles.textInfo}>
               <Text style={styles.textInfoBold}>Facilidades: </Text>
@@ -96,7 +96,7 @@ export default function Informacoes() {
         </View>
 
         <View style={styles.containerMaisInfo}>
-          <Feather name="globe" size={24} color="black" />
+          <Feather name="globe" size={24} color="#ffffff" />
           <View style={styles.textWrapper}>
             <Text style={styles.textInfo}>
               <Text style={styles.textInfoBold}>Idiomas: </Text>
@@ -112,13 +112,13 @@ export default function Informacoes() {
 const styles = StyleSheet.create({
   containerGeral: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#18212A',
     padding: 20,
   },
   title: {
     fontFamily: 'Poppins_700Bold',
     fontSize: 20,
-    color: '#000000',
+    color: '#ffffff',
     textAlign: 'center',
     marginBottom: 24,
   },
@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
   textInfo: {
     fontFamily: 'Poppins_400Regular',
     flexWrap: 'wrap',
+    color: '#ffffff',
   },
   textInfoBold: {
     fontFamily: 'Poppins_700Bold',

@@ -67,6 +67,11 @@ export default function Conta() {
       setCurrentPassword('');
       setPasswordStep('check');
       showGoodModal('Senha atualizada com sucesso!');
+
+      setTimeout(() => {
+        setGoodModalVisible(false);
+      }, 4000);
+
     } catch (error) {
       showErrorModal('Erro ao atualizar a senha.');
     }
@@ -213,8 +218,8 @@ export default function Conta() {
     <View style={styles.container}>
 
       <StatusBar
-        backgroundColor="#ffffff"
-        barStyle="dark-content"
+        backgroundColor="#18212A"
+        barStyle="light-content"
       />
 
       <Text style={styles.title}>Conta</Text>
@@ -231,7 +236,7 @@ export default function Conta() {
       </TouchableOpacity>
 
       <View style={styles.containerName}>
-        <Feather name="user" size={24} color="black" />
+        <Feather name="user" size={24} color="#ffffff" />
         <View style={styles.loginTextContainer}>
           <Text style={styles.textName}>Nome</Text>
           <Text style={styles.textNameSecundario}>{userName ? userName : 'Carregando...'}</Text>
@@ -244,7 +249,7 @@ export default function Conta() {
       </View>
 
       <View style={styles.containerName}>
-        <Feather name="user" size={24} color="black" />
+        <Feather name="user" size={24} color="#ffffff" />
         <View style={styles.loginTextContainer}>
           <Text style={styles.textName}>Sobrenome</Text>
           <Text style={styles.textNameSecundario}>{userLastName ? userLastName : 'Carregando...'}</Text>
@@ -257,7 +262,7 @@ export default function Conta() {
       </View>
 
       <View style={styles.containerName}>
-        <Feather name="at-sign" size={24} color="black" />
+        <Feather name="mail" size={24} color="#ffffff" />
         <View style={styles.loginTextContainer}>
           <Text style={styles.textName}>E-mail</Text>
           <Text style={styles.textNameSecundario}>{userEmail ? userEmail : 'Carregando...'}</Text>
@@ -270,7 +275,7 @@ export default function Conta() {
       </View>
 
       <View style={styles.containerName}>
-        <Feather name="lock" size={24} color="black" />
+        <Feather name="lock" size={24} color="#ffffff" />
         <View style={styles.loginTextContainer}>
           <Text style={styles.textName}>Senha</Text>
           <Text style={styles.textNameSecundario}>**********</Text>
@@ -281,12 +286,12 @@ export default function Conta() {
       </View>
 
       <TouchableOpacity style={styles.optionContainer} onPress={toggleModal}>
-        <Feather name="file-text" size={24} color="black" />
+        <Feather name="file-text" size={24} color="#ffffff" />
         <Text style={styles.optionText}>Termos e condições de uso</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.buttonSair} onPress={handleLogout}>
-        <Text style={styles.buttonText}>Sair</Text>
+        <Text style={styles.buttonTextSair}>Sair</Text>
       </TouchableOpacity>
 
       <Modal
@@ -354,13 +359,14 @@ export default function Conta() {
               <View style={styles.inputSenhaContainer}>
                 <TextInput
                   placeholder="Senha atual"
+                  placeholderTextColor={'#a1a1a1'}
                   secureTextEntry={!showCurrentPassword}
                   style={styles.passwordInput}
                   value={currentPassword}
                   onChangeText={setCurrentPassword}
                 />
                 <TouchableOpacity onPress={() => setShowCurrentPassword(!showCurrentPassword)}>
-                  <Text style={{ color: '#000000'}}>
+                  <Text style={{ color: '#a1a1a1'}}>
                     {showCurrentPassword ? 'Ocultar' : 'Mostrar'}
                   </Text>
                 </TouchableOpacity>
@@ -377,13 +383,14 @@ export default function Conta() {
               <View style={styles.inputSenhaContainer}>
                 <TextInput
                   placeholder="Nova senha"
+                  placeholderTextColor={'#a1a1a1'}
                   secureTextEntry={!showNewPassword}
                   style={styles.passwordInput}
                   value={newPassword}
                   onChangeText={setNewPassword}
                 />
                 <TouchableOpacity onPress={() => setShowNewPassword(!showNewPassword)}>
-                  <Text style={{ color: '#000000'}}>
+                  <Text style={{ color: '#a1a1a1'}}>
                     {showNewPassword ? 'Ocultar' : 'Mostrar'}
                   </Text>
                 </TouchableOpacity>
@@ -392,13 +399,14 @@ export default function Conta() {
               <View style={styles.inputSenhaContainer}>
                 <TextInput
                   placeholder="Confirmar nova senha"
+                  placeholderTextColor={'#a1a1a1'}
                   secureTextEntry={!showConfirmPassword}
                   style={styles.passwordInput}
                   value={confirmNewPassword}
                   onChangeText={setConfirmNewPassword}
                 />
                 <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
-                  <Text style={{ color: '#000000'}}>
+                  <Text style={{ color: '#a1a1a1'}}>
                     {showConfirmPassword ? 'Ocultar' : 'Mostrar'}
                   </Text>
                 </TouchableOpacity>
@@ -445,7 +453,7 @@ export default function Conta() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#18212A',
     padding: 20,
   },
   title: {
@@ -453,6 +461,7 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_700Bold",
     alignSelf: 'center',
     marginBottom: 24,
+    color: '#ffffff',
   },
   containerName: {
     flexDirection: 'row',
@@ -473,16 +482,17 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 16,
     fontFamily: "Poppins_400Regular",
-    borderBottomColor: '#18212A',
+    borderBottomColor: '#ffffff',
     borderBottomWidth: 1.5,
     paddingBottom: 4,
+    color: '#ffffff',
   },
   perfilImage: {
     borderRadius: 100,
     height: 80,
     width: 80,
     borderWidth: 2,
-    borderColor: '#000000'
+    borderColor: '#50687F'
   },
   containerImage: {
     alignItems: 'center',
@@ -491,26 +501,31 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     padding: 8,
-    backgroundColor: '#18212A',
+    backgroundColor: '#C9A64D',
     marginBottom: 24,
     borderRadius: 10,
   },
   buttonText: {
+    color: '#18212A',
+    fontFamily: 'Poppins_400Regular',
+  },
+  buttonTextSair: {
     color: '#ffffff',
     fontFamily: 'Poppins_400Regular',
   },
   buttonContainerAlterar: {
     alignItems: 'center',
     padding: 8,
-    backgroundColor: '#18212A',
+    backgroundColor: '#C9A64D',
     borderRadius: 10,
   },
   textName: {
     fontFamily: 'Poppins_400Regular',
+    color: '#ffffff',
   },
   textNameSecundario: {
     fontFamily: 'Poppins_400Regular',
-    color: '#818181',
+    color: '#A1A1A1',
   },
   buttonSair: {
     alignItems: 'center',
@@ -524,27 +539,27 @@ const styles = StyleSheet.create({
   margin: 0,
   },
   modalContentTermos: {
-    backgroundColor: 'white',
+    backgroundColor: '#50687F',
     padding: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     minHeight: '50%',
   },
   modalContentInput: {
-    backgroundColor: 'white',
+    backgroundColor: '#50687F',
     padding: 20,
     borderRadius: 20,
     minHeight: '30%',
   },
   modalContentErro: {
-    backgroundColor: 'white',
+    backgroundColor: '#50687F',
     padding: 20,
     borderRadius: 20,
     minHeight: '30%',
     justifyContent: 'center',
   },
   modalContentGood: {
-    backgroundColor: 'white',
+    backgroundColor: '#50687F',
     padding: 20,
     borderRadius: 20,
     minHeight: '30%',
@@ -554,9 +569,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Poppins_700Bold',
     marginBottom: 10,
+    color:'#ffffff',
   },
   modalTitleErro: {
-    fontSize: 18,
+    fontSize: 24,
     fontFamily: 'Poppins_700Bold',
     marginBottom: 10,
     color: '#C70039',
@@ -564,27 +580,28 @@ const styles = StyleSheet.create({
   modalText: {
     fontFamily: 'Poppins_400Regular',
     fontSize: 14,
-    color: '#333333',
+    color: '#ffffff',
     marginBottom: 24,
   },
   modalTextGood: {
     fontFamily: 'Poppins_400Regular',
     fontSize: 14,
-    color: '#333333',
+    color: '#ffffff',
     marginBottom: 24,
     textAlign: 'center',
   },
   buttonFechar: {
     alignItems: 'center',
     padding: 8,
-    backgroundColor: '#18212A',
+    backgroundColor: '#C9A64D',
     borderRadius: 10,
   },
   passwordInput: {
   flex: 1,
   paddingVertical: 10,
   fontFamily: 'Poppins_400Regular',
-},
+  color: '#ffffff',
+  },
   checkIcon: {
     alignItems: 'center',
     marginBottom: 24,
@@ -596,5 +613,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 24,
     paddingHorizontal: 10,
+    borderColor: '#a1a1a1',
   },
 });

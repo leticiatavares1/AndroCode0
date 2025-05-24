@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard, StatusBar } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard, StatusBar, Image } from "react-native";
 import { Feather } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import styles from "./Styles";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase/firebaseConfig";
 import { useRouter } from "expo-router";
+import Modal from 'react-native-modal';
 
 
 export default function Login() {
@@ -15,6 +16,18 @@ export default function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorModalMessage, setErrorModalMessage] = useState('');
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [goodModalMessage, setGoodModalMessage] = useState('');
+  const [goodModalVisible, setGoodModalVisible] = useState(false);
+
+  const toggleModalError = () => {
+    setErrorModalVisible(false);
+  };
+
+  const toggleModalGood = () => {
+    setGoodModalVisible(false);
+  };
 
   const handleLogin = async () => {
     try {
@@ -22,20 +35,42 @@ export default function Login() {
       const user = userCredential.user;
       
       if (!user.emailVerified) {
-        Alert.alert(
-          "E-mail não verificado",
-          "Por favor, verifique seu e-mail antes de fazer login."
-        );
+        setErrorModalMessage("Por favor, verifique seu e-mail antes de fazer login.");
+        setErrorModalVisible(true);
         return;
       }
 
       router.replace("/Home");
+
     } catch (error: any) {
       let msg = "Erro ao fazer login.";
-      if (error.code === "auth/invalid-email") msg = "E-mail ou senha incorretos.";
-      if (error.code === "auth/user-not-found") msg = "Usuário não encontrado.";
-      if (error.code === "auth/wrong-password") msg = "E-mail ou senha incorretos.";
-      Alert.alert("Erro", msg);
+      let showDetails = true;
+
+      if (error.code === "auth/invalid-email") {
+        msg = "E-mail ou senha incorretos.";
+        showDetails = false;
+      }
+      else if (error.code === "auth/user-not-found") {
+        msg = "Usuário não encontrado.";
+        showDetails = false;
+      }
+      else if (error.code === "auth/wrong-password") {
+        msg = "E-mail ou senha incorretos.";
+        showDetails = false;
+      }
+      else if (error.code === "auth/invalid-credential") {
+        msg = "E-mail ou senha incorretos.";
+        showDetails = false;
+      }
+      else if (error.code === "auth/missing-password") {
+        msg = "E-mail ou senha incorretos.";
+        showDetails = false;
+      }
+
+      const errorDetails = showDetails && error.message ? `\n\nDetalhes: ${error.message}` : "";
+
+      setErrorModalMessage(`${msg}${errorDetails}`);
+      setErrorModalVisible(true);
     }
   };
 
@@ -45,40 +80,41 @@ export default function Login() {
       <View style={styles.containerGeral}>
 
       <StatusBar
-        backgroundColor="#ffffff"
-        barStyle="dark-content"
+        backgroundColor="#18212A"
+        barStyle="light-content"
       />
 
         <View style={styles.containerSecundario}>
 
           <View style={styles.logo}>
-            <Feather name="scissors" size={100} color="black" />
+            <Image source={require('../../../assets/images/splash-screen.png')} style={styles.logoImage}/>
           </View>
 
           <Text style={styles.title}>Entrar</Text>
 
           <View style={styles.inputContainer}>
-            <Feather name="at-sign" size={24} color="black" />
+            <Feather name="mail" size={24} color="#A1A1A1" style={styles.iconStyles}/>
             <TextInput
               style={styles.input}
               placeholder="Digite seu e-mail"
+              placeholderTextColor={'#A1A1A1'}
               value={username}
               onChangeText={setUsername}
             />
           </View>
 
           <View style={styles.inputContainer}>
-            <Feather name="lock" size={24} color="black" />
+            <Feather name="lock" size={24} color="#A1A1A1" style={styles.iconStyles}/>
             <TextInput
               style={styles.input}
               placeholder="Senha"
+              placeholderTextColor={'#A1A1A1'}
               secureTextEntry={!showPassword}
               value={password}
               onChangeText={setPassword}
             />
             <TouchableOpacity 
               onPress={() => setShowPassword(!showPassword)}
-              style={{ position: 'absolute', right: 0, padding: 10 }}
             >
               <Text style={styles.showPasswordStyle}>
                   {showPassword ? 'Ocultar' : 'Mostrar'}
@@ -95,8 +131,33 @@ export default function Login() {
           <Text style={styles.criarConta}>Ainda não possui uma conta? 
             <Link href="/screens/Cadastro" style={styles.criarContaLink}> Cadastre-se</Link>
           </Text>
-
         </View>
+
+        <Modal isVisible={goodModalVisible} onBackdropPress={() => setGoodModalVisible(false)}>
+          <View style={styles.modalContentGood}>
+            <View style={styles.checkIcon}>
+              <Feather name="check-circle" size={40} color="#3CB371" />
+            </View>
+            <Text style={styles.modalTextGood}>{goodModalMessage}</Text>
+  
+            <View>
+              <TouchableOpacity style={styles.buttonContainer} onPress={toggleModalGood}>
+                <Text style={styles.buttonText}>Fechar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
+        <Modal isVisible={errorModalVisible} onBackdropPress={() => setErrorModalVisible(false)}>
+          <View style={styles.modalContentErro}>
+            <Text style={styles.modalTitleErro}>Erro</Text>
+            <Text style={styles.modalText}>{errorModalMessage}</Text>
+  
+            <TouchableOpacity style={styles.buttonContainer} onPress={toggleModalError}>
+              <Text style={styles.buttonTextModal}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
 
       </View>
     </TouchableWithoutFeedback>
