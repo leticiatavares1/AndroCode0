@@ -37,6 +37,9 @@ cd ..
 </p>
 <p>O expo prebuild --clean vai recriar toda a pasta android/ (e ios/ se existir), com base no app.json.</p>
 
+<h3>Link para acessar a documentação e a apresentação do aplicativo</h3>
+<a>https://drive.google.com/drive/folders/1FNlZcNNminuQRKbVTqsr2wDKnUzNFk8q?usp=sharing</a>
+
 <!--
 Banco de dados Type
 1 - Cliente

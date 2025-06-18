@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert, TouchableWithoutFeedback, Keyboard, StatusBar, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, Keyboard, StatusBar, Image, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { Feather } from '@expo/vector-icons';
-import { Link } from 'expo-router';
 import styles from "./Styles";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../firebase/firebaseConfig";
-import { useRouter } from "expo-router";
+import { useRouter, Link } from "expo-router";
 import Modal from 'react-native-modal';
 
 
@@ -75,91 +74,101 @@ export default function Login() {
   };
 
   return (
+    
+    <KeyboardAvoidingView 
+          behavior={Platform.OS === "ios" ? "padding" : "padding"} 
+          style={{ flex: 1 }}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView 
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={styles.containerGeral}>
 
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.containerGeral}>
+          <StatusBar
+            backgroundColor="#18212A"
+            barStyle="light-content"
+          />
 
-      <StatusBar
-        backgroundColor="#18212A"
-        barStyle="light-content"
-      />
+            <View style={styles.containerSecundario}>
 
-        <View style={styles.containerSecundario}>
+              <View style={styles.logo}>
+                <Image source={require('../../../assets/images/splash-screen.png')} style={styles.logoImage}/>
+              </View>
 
-          <View style={styles.logo}>
-            <Image source={require('../../../assets/images/splash-screen.png')} style={styles.logoImage}/>
-          </View>
+              <Text style={styles.title}>Entrar</Text>
 
-          <Text style={styles.title}>Entrar</Text>
+              <View style={styles.inputContainer}>
+                <Feather name="mail" size={24} color="#A1A1A1" style={styles.iconStyles}/>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Digite seu e-mail"
+                  placeholderTextColor={'#A1A1A1'}
+                  value={username}
+                  onChangeText={setUsername}
+                />
+              </View>
 
-          <View style={styles.inputContainer}>
-            <Feather name="mail" size={24} color="#A1A1A1" style={styles.iconStyles}/>
-            <TextInput
-              style={styles.input}
-              placeholder="Digite seu e-mail"
-              placeholderTextColor={'#A1A1A1'}
-              value={username}
-              onChangeText={setUsername}
-            />
-          </View>
+              <View style={styles.inputContainer}>
+                <Feather name="lock" size={24} color="#A1A1A1" style={styles.iconStyles}/>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Senha"
+                  placeholderTextColor={'#A1A1A1'}
+                  secureTextEntry={!showPassword}
+                  value={password}
+                  onChangeText={setPassword}
+                />
+                <TouchableOpacity 
+                  onPress={() => setShowPassword(!showPassword)}
+                >
+                  <Text style={styles.showPasswordStyle}>
+                      {showPassword ? 'Ocultar' : 'Mostrar'}
+                  </Text>
+                </TouchableOpacity>
+              </View>
 
-          <View style={styles.inputContainer}>
-            <Feather name="lock" size={24} color="#A1A1A1" style={styles.iconStyles}/>
-            <TextInput
-              style={styles.input}
-              placeholder="Senha"
-              placeholderTextColor={'#A1A1A1'}
-              secureTextEntry={!showPassword}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <TouchableOpacity 
-              onPress={() => setShowPassword(!showPassword)}
-            >
-              <Text style={styles.showPasswordStyle}>
-                  {showPassword ? 'Ocultar' : 'Mostrar'}
-              </Text>
-            </TouchableOpacity>
-          </View>
+              <Link href="/screens/EsqueceuSenha" style={styles.esqueceuSenha}>Esqueceu a senha?</Link>
 
-          <Link href="/screens/EsqueceuSenha" style={styles.esqueceuSenha}>Esqueceu a senha?</Link>
-
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Acessar</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.criarConta}>Ainda não possui uma conta? 
-            <Link href="/screens/Cadastro" style={styles.criarContaLink}> Cadastre-se</Link>
-          </Text>
-        </View>
-
-        <Modal isVisible={goodModalVisible} onBackdropPress={() => setGoodModalVisible(false)}>
-          <View style={styles.modalContentGood}>
-            <View style={styles.checkIcon}>
-              <Feather name="check-circle" size={40} color="#3CB371" />
-            </View>
-            <Text style={styles.modalTextGood}>{goodModalMessage}</Text>
-  
-            <View>
-              <TouchableOpacity style={styles.buttonContainer} onPress={toggleModalGood}>
-                <Text style={styles.buttonText}>Fechar</Text>
+              <TouchableOpacity style={styles.button} onPress={handleLogin}>
+                <Text style={styles.buttonText}>Acessar</Text>
               </TouchableOpacity>
+
+              <Text style={styles.criarConta}>Ainda não possui uma conta? 
+                <Link href="/screens/Cadastro" style={styles.criarContaLink}> Cadastre-se</Link>
+              </Text>
             </View>
-          </View>
-        </Modal>
 
-        <Modal isVisible={errorModalVisible} onBackdropPress={() => setErrorModalVisible(false)}>
-          <View style={styles.modalContentErro}>
-            <Text style={styles.modalTitleErro}>Erro</Text>
-            <Text style={styles.modalText}>{errorModalMessage}</Text>
-  
-            <TouchableOpacity style={styles.buttonContainer} onPress={toggleModalError}>
-              <Text style={styles.buttonTextModal}>Fechar</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+            <Modal isVisible={goodModalVisible} onBackdropPress={() => setGoodModalVisible(false)}>
+              <View style={styles.modalContentGood}>
+                <View style={styles.checkIcon}>
+                  <Feather name="check-circle" size={40} color="#3CB371" />
+                </View>
+                <Text style={styles.modalTextGood}>{goodModalMessage}</Text>
 
-      </View>
-    </TouchableWithoutFeedback>
+                <View>
+                  <TouchableOpacity style={styles.buttonContainer} onPress={toggleModalGood}>
+                    <Text style={styles.buttonText}>Fechar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+
+            <Modal isVisible={errorModalVisible} onBackdropPress={() => setErrorModalVisible(false)}>
+              <View style={styles.modalContentErro}>
+                <Text style={styles.modalTitleErro}>Erro</Text>
+                <Text style={styles.modalText}>{errorModalMessage}</Text>
+
+                <TouchableOpacity style={styles.buttonContainer} onPress={toggleModalError}>
+                  <Text style={styles.buttonTextModal}>Fechar</Text>
+                </TouchableOpacity>
+              </View>
+            </Modal>
+
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }

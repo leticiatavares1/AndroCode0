@@ -176,7 +176,7 @@ export default function Conta() {
     
       // Define o caminho local para salvar a imagem
       const fileName = selectedAsset.uri.split('/').pop();
-      const localUri = FileSystem.documentDirectory + fileName;
+      const localUri = (FileSystem.documentDirectory ?? '') + fileName;
     
       // Copia a imagem para o armazenamento interno do app
       await FileSystem.copyAsync({
@@ -302,6 +302,7 @@ export default function Conta() {
         onSwipeComplete={toggleModal}
       >
         <View style={styles.modalContentTermos}>
+          <View style={styles.modalTermosAbaixar} />
           <ScrollView showsVerticalScrollIndicator={false}>
             <Text style={styles.modalTitle}>Termos e Condições de Uso</Text>
             <Text style={styles.modalText}>
@@ -492,7 +493,7 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     borderWidth: 2,
-    borderColor: '#50687F'
+    borderColor: '#C9A64D'
   },
   containerImage: {
     alignItems: 'center',
@@ -545,6 +546,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     minHeight: '50%',
   },
+  modalTermosAbaixar: {
+    width: 40,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: '#cccccc',
+    alignSelf: 'center',
+    marginBottom: 10,
+  },
   modalContentInput: {
     backgroundColor: '#50687F',
     padding: 20,
@@ -582,6 +591,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#ffffff',
     marginBottom: 24,
+    textAlign: "justify",
   },
   modalTextGood: {
     fontFamily: 'Poppins_400Regular',

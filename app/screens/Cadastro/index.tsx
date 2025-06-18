@@ -100,6 +100,7 @@ export default function Cadastro() {
   };
 
   return (
+    
     <KeyboardAvoidingView 
       behavior={Platform.OS === "ios" ? "padding" : "padding"} 
       style={{ flex: 1 }}
