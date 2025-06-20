@@ -9,6 +9,13 @@ O projeto consiste no desenvolvimento de uma plataforma para Android, com o prin
 
 - Banco de dados: FireBase
 
+# paticipantes do projeto:
+```
+Felipe de Lima 
+João Vitor Nascimento
+Letícia Tavares Braga
+```
+
 🗃️ Tabela agendamentos com os seguintes campos:
 ```
 id: string (primary key)  // Ex: "OT3gQ0TO8Q1BHTv_GPZ"
