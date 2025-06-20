@@ -1,6 +1,13 @@
 # Wolf Studio Barber App
 
 O projeto consiste no desenvolvimento de uma plataforma para Android, com o principal objetivo de facilitar o agendamento de serviços em uma barbearia. A proposta é tornar a experiência do usuário mais agradável e oferecer um agendamento mais prático e personalizável.
+# Participantes do desenvolvimento do projeto:
+```
+Felipe de Lima 
+João Vitor Nascimento
+Letícia Tavares Braga
+```
+
 ## 🔧 Requisitos:
 
 - React-Native
@@ -8,13 +15,6 @@ O projeto consiste no desenvolvimento de uma plataforma para Android, com o prin
 - TypeScript
 
 - Banco de dados: FireBase
-
-# paticipantes do projeto:
-```
-Felipe de Lima 
-João Vitor Nascimento
-Letícia Tavares Braga
-```
 
 🗃️ Tabela agendamentos com os seguintes campos:
 ```
