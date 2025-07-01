@@ -1,0 +1,3 @@
+Baixe os arquivos presentes no link do google drive para ter acesso ao banco de dados e siga o passo a passo do arquivo "instrucoes_firebase.txt"
+
+Link: https://drive.google.com/drive/folders/1GYl1x_2M0FXbI5ubEypAvca9dfsCnD8O?usp=sharing

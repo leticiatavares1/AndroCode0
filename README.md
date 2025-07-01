@@ -16,6 +16,9 @@ Letícia Tavares Braga
 
 - Banco de dados: FireBase
 
+## 🗃️ Banco de dados 
+### Para instalar o banco de dados acesse a pasta "BancoDeDadosLink" e siga o passo a passo presente na pasta.
+
 🗃️ Tabela agendamentos com os seguintes campos:
 ```
 id: string (primary key)  // Ex: "OT3gQ0TO8Q1BHTv_GPZ"
